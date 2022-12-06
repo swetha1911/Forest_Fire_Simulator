@@ -9,22 +9,24 @@ namespace Project_Forest_Fire_Simulator
     public class ForestFire
     {
         GridDisplay gridDisplay;
-        int[] positionToSetFire;
-        public ForestFire(int x, int y)
+        ManMadeFireSimulation manMadeFireSimulation;
+
+        public ForestFire(ManMadeFireSimulation manMadeFireSimulation)
         {
+            this.manMadeFireSimulation = manMadeFireSimulation;
             gridDisplay = new GridDisplay(21);
-            positionToSetFire = new int[] { x, y };
         }
 
         public void startForestFire()
         {
             int[,] grid = this.gridDisplay.getGrid();
-            grid[positionToSetFire[0], positionToSetFire[1]] = (int)GridDisplay.GridStatus.BURNING;
+            int[] position = this.manMadeFireSimulation.getPosition();
+            grid[position[0], position[1]] = (int)GridDisplay.GridStatus.BURNING;
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Forest Fire Simulation");
-                Console.WriteLine("Forest Fire started at position: " + positionToSetFire[0] + "," + positionToSetFire[1]);
+                Console.WriteLine("Forest Fire Simulation - Man Made\n");
+                Console.WriteLine("Forest Fire started at position: " + position[0] + "," + position[1]);
                 this.gridDisplay.displayGrid();
                 Console.ReadLine();
                 int i = 0, j = 0;
